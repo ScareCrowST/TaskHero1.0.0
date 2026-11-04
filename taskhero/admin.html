@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TaskHero Admin Panel</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0b0d17;
+    color: #e8ecf4;
+    min-height: 100vh;
+  }
+  .hidden { display: none !important; }
+
+  /* Login Page */
+  .login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .login-box {
+    max-width: 420px;
+    width: 100%;
+    background: linear-gradient(180deg, #1a1d38, #11142a);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+  }
+  .login-box h1 { font-size: 1.8rem; margin: 16px 0 8px; }
+  .login-box p { color: #8a92a6; margin-bottom: 24px; }
+  .login-box .field { margin-bottom: 16px; text-align: left; }
+  .login-box label {
+    display: block;
+    font-size: 0.85rem;
+    color: #8a92a6;
+    margin-bottom: 6px;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 10px;
+    color: #e8ecf4;
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  .login-box input:focus {
+    outline: none;
+    border-color: #7c5cff;
+    background: rgba(255,255,255,0.07);
+  }
+  .btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #7c5cff, #5b3df0);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .back-link {
+    display: block;
+    margin-top: 16px;
+    color: #22d3ee;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  /* Dashboard */
+  .dashboard { min-height: 100vh; }
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: rgba(11,13,23,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+  }
+  .top-nav .logo { font-size: 1.2rem; font-weight: 700; }
+  .top-nav .logo span { color: #22d3ee; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-right .muted { color: #8a92a6; font-size: 0.9rem; }
+  .btn-ghost {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    color: #e8ecf4;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.07); }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .stat-card .icon {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(124,92,255,0.15);
+    border-radius: 12px;
+  }
+  .stat-card .label { font-size: 0.85rem; color: #8a92a6; }
+  .stat-card .value { font-size: 1.5rem; font-weight: 700; }
+  .stat-card.pending { border-color: rgba(251,191,36,0.3); }
+  .stat-card.pending .icon { background: rgba(251,191,36,0.15); }
+  .stat-card.approved { border-color: rgba(52,211,153,0.3); }
+  .stat-card.approved .icon { background: rgba(52,211,153,0.15); }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .filters h2 { font-size: 1.4rem; }
+  .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 8px;
+    color: #8a92a6;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .filter-btn.active {
+    background: linear-gradient(135deg, #7c5cff, #5b3df0);
+    color: white;
+    border-color: transparent;
+  }
+
+  /* School Cards */
+  .school-card {
+    padding: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+  .school-card:hover { border-color: rgba(124,92,255,0.3); }
+  .school-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .school-head h3 { font-size: 1.2rem; margin-bottom: 6px; }
+  .school-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #8a92a6;
+  }
+  .school-code {
+    font-family: monospace;
+    background: rgba(34,211,238,0.1);
+    color: #22d3ee;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+  }
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .status-badge.pending {
+    background: rgba(251,191,36,0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251,191,36,0.3);
+  }
+  .status-badge.approved {
+    background: rgba(52,211,153,0.15);
+    color: #34d399;
+    border: 1px solid rgba(52,211,153,0.3);
+  }
+  .status-badge.rejected {
+    background: rgba(248,113,113,0.15);
+    color: #f87171;
+    border: 1px solid rgba(248,113,113,0.3);
+  }
+  .school-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .info-item .lbl { font-size: 0.75rem; color: #8a92a6; text-transform: uppercase; }
+  .info-item .val { font-size: 0.95rem; margin-top: 2px; }
+  .info-item .val a { color: #22d3ee; text-decoration: none; }
+  .school-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-sm {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.09);
+    background: rgba(255,255,255,0.04);
+    color: #e8ecf4;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+  }
+  .btn-sm:hover { background: rgba(255,255,255,0.07); }
+  .btn-sm.approve { background: linear-gradient(135deg, #7c5cff, #5b3df0); border-color: transparent; }
+  .btn-sm.danger { color: #f87171; border-color: rgba(248,113,113,0.3); }
+  .btn-sm.danger:hover { background: rgba(248,113,113,0.15); }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #8a92a6;
+  }
+  .empty .icon { font-size: 3rem; margin-bottom: 12px; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #7c5cff, #5b3df0);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="login-page">
+  <div class="login-box">
+    <div style="font-size: 2rem;">🛡️</div>
+    <h1>Task<span style="color:#22d3ee">Hero</span> Admin</h1>
+    <p>Super Admin Access · Authorized only</p>
+    <form id="loginForm">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUser" required placeholder="admin" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" required placeholder="••••••••" />
+      </div>
+      <button type="submit" class="btn-primary">Access Panel →</button>
+    </form>
+    <a href="index.html" class="back-link">← Back to main site</a>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="dashboard hidden">
+  <nav class="top-nav">
+    <div class="logo">🛡️ Task<span>Hero</span> Admin</div>
+    <div class="nav-right">
+      <span class="muted">Welcome, <strong>Admin</strong></span>
+      <button class="btn-ghost" id="logoutBtn">Log out</button>
+    </div>
+  </nav>
+
+  <div class="content">
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="icon">🏫</div>
+        <div>
+          <div class="label">Total Schools</div>
+          <div class="value" id="statTotal">0</div>
+        </div>
+      </div>
+      <div class="stat-card pending">
+        <div class="icon">⏳</div>
+        <div>
+          <div class="label">Pending</div>
+          <div class="value" id="statPending">0</div>
+        </div>
+      </div>
+      <div class="stat-card approved">
+        <div class="icon">✅</div>
+        <div>
+          <div class="label">Approved</div>
+          <div class="value" id="statApproved">0</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon">👥</div>
+        <div>
+          <div class="label">Total Users</div>
+          <div class="value" id="statUsers">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <h2>School Registrations</h2>
+      <div class="filter-btns">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="pending">Pending</button>
+        <button class="filter-btn" data-filter="approved">Approved</button>
+        <button class="filter-btn" data-filter="rejected">Rejected</button>
+      </div>
+    </div>
+
+    <!-- Schools List -->
+    <div id="schoolsList"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<script>
+// ============================================
+// ADMIN PANEL - COMPLETE SELF-CONTAINED
+// ============================================
+
+const SUPER_ADMIN = { username: 'admin', password: 'taskhero2026' };
+let currentFilter = 'all';
+
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+function getStore(key, fallback = []) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch { return fallback; }
+}
+
+function setStore(key, val) {
+  localStorage.setItem(key, JSON.stringify(val));
+}
+
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.add('hidden'), 2500);
+}
+
+function formatDate(ts) {
+  return new Date(ts).toLocaleString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+}
+
+// ---- LOGIN ----
+$('#loginForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const u = $('#loginUser').value.trim();
+  const p = $('#loginPass').value;
+
+  console.log('Login attempt:', u, p === SUPER_ADMIN.password ? '✓' : '✗');
+
+  if (u === SUPER_ADMIN.username && p === SUPER_ADMIN.password) {
+    sessionStorage.setItem('th_admin', '1');
+    showDashboard();
+  } else {
+    toast('❌ Invalid credentials');
+  }
+});
+
+// ---- LOGOUT ----
+$('#logoutBtn').addEventListener('click', () => {
+  sessionStorage.removeItem('th_admin');
+  $('#dashboard').classList.add('hidden');
+  $('#loginPage').classList.remove('hidden');
+});
+
+// ---- SHOW DASHBOARD ----
+function showDashboard() {
+  console.log('Showing dashboard...');
+  $('#loginPage').classList.add('hidden');
+  $('#dashboard').classList.remove('hidden');
+  renderAll();
+}
+
+// ---- RENDER ALL ----
+function renderAll() {
+  renderStats();
+  renderSchools();
+}
+
+// ---- RENDER STATS ----
+function renderStats() {
+  const schools = getStore('th_schools', []);
+  const users = getStore('th_users', []);
+
+  console.log('Schools loaded:', schools.length);
+  console.log('Users loaded:', users.length);
+
+  $('#statTotal').textContent = schools.length;
+  $('#statPending').textContent = schools.filter(s => s.status === 'pending').length;
+  $('#statApproved').textContent = schools.filter(s => s.status === 'approved').length;
+  $('#statUsers').textContent = users.length;
+}
+
+// ---- RENDER SCHOOLS ----
+function renderSchools() {
+  const schools = getStore('th_schools', []);
+  const users = getStore('th_users', []);
+  const filtered = currentFilter === 'all'
+    ? schools
+    : schools.filter(s => s.status === currentFilter);
+
+  console.log('Rendering schools, filter:', currentFilter, 'count:', filtered.length);
+
+  const list = $('#schoolsList');
+
+  if (filtered.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <div class="icon">📭</div>
+        <p>No schools found${currentFilter !== 'all' ? ` with status "${currentFilter}"` : ''}.</p>
+        <p style="margin-top:8px;font-size:0.85rem;">Total schools in storage: ${schools.length}</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = filtered.map(school => {
+    const userCount = users.filter(u => u.schoolId === school.code).length;
+    const statusIcon = { pending: '⏳', approved: '✅', rejected: '❌' }[school.status] || '❓';
+
+    return `
+      <div class="school-card">
+        <div class="school-head">
+          <div>
+            <h3>${school.name || 'Unknown School'}</h3>
+            <div class="school-meta">
+              <span class="school-code">${school.code || 'N/A'}</span>
+              <span>🌍 ${school.country || 'N/A'}</span>
+              <span>👥 ${userCount} users</span>
+              <span>📅 ${formatDate(school.createdAt)}</span>
+            </div>
+          </div>
+          <div class="status-badge ${school.status}">
+            ${statusIcon} ${school.status}
+          </div>
+        </div>
+        <div class="school-info-grid">
+          <div class="info-item">
+            <div class="lbl">IB Program</div>
+            <div class="val">${school.ibProgram || 'N/A'}</div>
+          </div>
+          <div class="info-item">
+            <div class="lbl">Students</div>
+            <div class="val">${school.studentCount || 'N/A'}</div>
+          </div>
+          <div class="info-item">
+            <div class="lbl">Admin Email</div>
+            <div class="val">${school.adminEmail || users.find(u => u.schoolId === school.code && u.role === 'school_admin')?.email || 'N/A'}</div>
+          </div>
+          ${school.website ? `
+          <div class="info-item">
+            <div class="lbl">Website</div>
+            <div class="val"><a href="${school.website}" target="_blank">${school.website}</a></div>
+          </div>` : ''}
+        </div>
+        ${school.reason ? `
+        <div style="padding:12px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:12px;font-size:0.9rem;color:#8a92a6;">
+          <strong style="color:#e8ecf4;">Reason:</strong> ${school.reason}
+        </div>` : ''}
+        <div class="school-actions">
+          ${school.status === 'pending' ? `
+            <button class="btn-sm approve" onclick="approveSchool('${school.id}')">✅ Approve</button>
+            <button class="btn-sm danger" onclick="rejectSchool('${school.id}')">❌ Reject</button>
+          ` : ''}
+          ${school.status === 'approved' ? `
+            <button class="btn-sm danger" onclick="rejectSchool('${school.id}')">Revoke</button>
+          ` : ''}
+          ${school.status === 'rejected' ? `
+            <button class="btn-sm approve" onclick="approveSchool('${school.id}')">Re-approve</button>
+          ` : ''}
+          <button class="btn-sm danger" onclick="deleteSchool('${school.id}')">🗑️ Delete</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ---- FILTERS ----
+$$('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderSchools();
+  });
+});
+
+// ---- ACTIONS (global for onclick) ----
+window.approveSchool = (id) => {
+  if (!confirm('Approve this school?')) return;
+  const schools = getStore('th_schools', []);
+  const s = schools.find(x => x.id === id);
+  if (s) {
+    s.status = 'approved';
+    s.approvedAt = Date.now();
+    s.approvedBy = 'admin';
+    setStore('th_schools', schools);
+    toast('✅ School approved!');
+    renderAll();
+  }
+};
+
+window.rejectSchool = (id) => {
+  if (!confirm('Reject this school?')) return;
+  const schools = getStore('th_schools', []);
+  const s = schools.find(x => x.id === id);
+  if (s) {
+    s.status = 'rejected';
+    s.rejectedAt = Date.now();
+    s.rejectedBy = 'admin';
+    setStore('th_schools', schools);
+    toast('School rejected');
+    renderAll();
+  }
+};
+
+window.deleteSchool = (id) => {
+  if (!confirm('⚠️ Delete this school AND all its users? This cannot be undone!')) return;
+  if (!confirm('Are you absolutely sure?')) return;
+
+  const schools = getStore('th_schools', []);
+  const school = schools.find(x => x.id === id);
+  if (!school) return;
+
+  // Delete associated users
+  let users = getStore('th_users', []);
+  users = users.filter(u => u.schoolId !== school.code);
+  setStore('th_users', users);
+
+  // Delete school
+  const filtered = schools.filter(x => x.id !== id);
+  setStore('th_schools', filtered);
+
+  toast('School deleted');
+  renderAll();
+};
+
+// ---- INIT ----
+(function init() {
+  console.log('Admin panel initializing...');
+  console.log('th_schools:', localStorage.getItem('th_schools'));
+  console.log('th_users:', localStorage.getItem('th_users'));
+
+  if (sessionStorage.getItem('th_admin')) {
+    showDashboard();
+  }
+})();
+</script>
+</body>
+</html>

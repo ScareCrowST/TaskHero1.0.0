@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register Your School — TaskHero</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/press-start-2p@5.0.0/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.0/index.css" />
+</head>
+<body>
+
+<div class="register-page">
+  <div class="register-container">
+    <div class="register-header">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">Task<span class="accent">Hero</span></span>
+      </a>
+      <h1>Register Your School</h1>
+      <p class="muted">Join the TaskHero network and bring gamified learning to your students.</p>
+    </div>
+
+    <div class="register-info">
+      <div class="info-card">
+        <div class="info-icon">📋</div>
+        <div class="info-content">
+          <h3>What happens next?</h3>
+          <ul>
+            <li>Your registration will be reviewed by the TaskHero team</li>
+            <li>You'll receive an email confirmation within 24-48 hours</li>
+            <li>Once approved, you'll become the School Admin</li>
+            <li>You can then invite teachers and manage your school</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <form id="schoolRegisterForm" class="register-form">
+      <div class="form-section">
+        <h2>School Information</h2>
+        
+        <div class="field">
+          <label>School Name *</label>
+          <input type="text" name="schoolName" required placeholder="e.g. International School of Prague" />
+          <span class="field-hint">The full official name of your school</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>School Code *</label>
+            <input type="text" name="schoolCode" required placeholder="e.g. ISP-2026" pattern="[A-Z0-9\-]+" />
+            <span class="field-hint">Unique identifier (uppercase letters, numbers, hyphens only)</span>
+          </div>
+          <div class="field">
+            <label>Country *</label>
+            <input type="text" name="country" required placeholder="e.g. Czech Republic" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>School Website</label>
+          <input type="url" name="website" placeholder="https://www.yourschool.edu" />
+          <span class="field-hint">Optional — helps us verify your school</span>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>Admin Account</h2>
+        <p class="muted small">This will be the primary administrator for your school.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Admin Full Name *</label>
+            <input type="text" name="adminName" required placeholder="e.g. John Smith" />
+          </div>
+          <div class="field">
+            <label>Admin Position *</label>
+            <input type="text" name="adminPosition" required placeholder="e.g. Principal, IT Director" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Admin Email *</label>
+          <input type="email" name="adminEmail" required placeholder="admin@yourschool.edu" />
+          <span class="field-hint">Must be a school email address (preferred)</span>
+        </div>
+
+        <div class="field">
+          <label>Admin Phone</label>
+          <input type="tel" name="adminPhone" placeholder="+420 123 456 789" />
+          <span class="field-hint">Optional — for verification purposes</span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Password *</label>
+            <input type="password" name="password" required minlength="8" placeholder="At least 8 characters" />
+          </div>
+          <div class="field">
+            <label>Confirm Password *</label>
+            <input type="password" name="confirmPassword" required minlength="8" placeholder="Re-enter password" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>School Details</h2>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Number of Students *</label>
+            <select name="studentCount" required>
+              <option value="">Select range</option>
+              <option value="1-100">1-100 students</option>
+              <option value="101-500">101-500 students</option>
+              <option value="501-1000">501-1000 students</option>
+              <option value="1000+">1000+ students</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>IB Program *</label>
+            <select name="ibProgram" required>
+              <option value="">Select program</option>
+              <option value="MYP">MYP (Middle Years Programme)</option>
+              <option value="DP">DP (Diploma Programme)</option>
+              <option value="PYP">PYP (Primary Years Programme)</option>
+              <option value="Multiple">Multiple programs</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Why do you want to use TaskHero? *</label>
+          <textarea name="reason" rows="4" required placeholder="Tell us about your goals and how you plan to use TaskHero..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="checkbox-field">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms">
+            I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>. 
+            I confirm that I am authorized to register this school.
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Submit Registration →
+      </button>
+
+      <p class="register-footer">
+        Already have an account? <a href="index.html">Log in here</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card success-card">
+    <div class="success-icon">✅</div>
+    <h2>Registration Submitted!</h2>
+    <p>Thank you for registering your school with TaskHero.</p>
+    <div class="success-details">
+      <div class="detail-row">
+        <span class="detail-label">School Code:</span>
+        <span class="detail-value" id="displaySchoolCode">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Status:</span>
+        <span class="detail-value status-pending">Pending Review</span>
+      </div>
+    </div>
+    <p class="muted small">You will receive an email at <strong id="displayEmail">—</strong> once your school is approved.</p>
+    <button class="btn btn-primary btn-block" onclick="window.location.href='index.html'">
+      Return to Home
+    </button>
+  </div>
+</div>
+
+<script src="js/school-register.js"></script>
+</body>
+</html>

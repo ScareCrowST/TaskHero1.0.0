@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TaskHero — Level Up Your Learning</title>
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/press-start-2p@5.0.0/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.0/index.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛡️%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+<!-- ============ LANDING / AUTH ============ -->
+<section id="landing" class="view active">
+  <nav class="nav-glass">
+    <div class="logo">
+      <span class="logo-icon">🛡️</span>
+      <span class="logo-text">Task<span class="accent">Hero</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <button class="btn btn-ghost" data-action="show-login">Log in</button>
+      <button class="btn btn-primary" data-action="show-signup">Sign up</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="badge">✨ IB Personal Project · MYP Years 1–4</div>
+        <h1>Turn homework into an <span class="gradient-text">epic quest</span>.</h1>
+        <p class="hero-sub">TaskHero is a distraction-free homework & habit tracker built for MYP students. Earn XP, level up your pixel avatar, keep your streak alive — and actually enjoy staying organized.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" data-action="show-signup">Start your adventure →</button>
+          <button class="btn btn-ghost btn-lg" data-action="show-login">I already have an account</button>
+        </div>
+        <div class="hero-stats">
+          <div><b>100%</b><span>Local · No data sent</span></div>
+          <div><b>∞</b><span>Levels to grind</span></div>
+          <div><b>🔥</b><span>Streak multipliers</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-xp">
+          <div class="fc-label">Daily XP</div>
+          <div class="fc-value">+120</div>
+          <div class="fc-bar"><div class="fc-fill"></div></div>
+        </div>
+        <div class="floating-card card-streak">
+          <div class="fc-label">Streak</div>
+          <div class="fc-value">🔥 7 days</div>
+        </div>
+        <div class="floating-card card-level">
+          <div class="fc-label">Level</div>
+          <div class="fc-value">12</div>
+        </div>
+        <div class="avatar-showcase" id="landingAvatar">
+          <div class="pixel-hero">
+            <div class="ph-aura"></div>
+            <div class="ph-cape"></div>
+            <div class="ph-head">
+              <div class="ph-eye ph-eye-l"></div>
+              <div class="ph-eye ph-eye-r"></div>
+            </div>
+            <div class="ph-body">
+              <div class="ph-belt"></div>
+              <div class="ph-emblem">⚔</div>
+            </div>
+            <div class="ph-arm ph-arm-l"></div>
+            <div class="ph-arm ph-arm-r">
+              <div class="ph-weapon ph-weapon-sword"></div>
+            </div>
+            <div class="ph-leg ph-leg-l"></div>
+            <div class="ph-leg ph-leg-r"></div>
+            <div class="ph-sparkle sp1">✦</div>
+            <div class="ph-sparkle sp2">✧</div>
+            <div class="ph-sparkle sp3">✦</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="features" class="section">
+    <div class="section-head">
+      <h2>Everything you need. <span class="gradient-text">Nothing you don't.</span></h2>
+      <p>Built for students who want to stay organized without the noise.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="f-icon">📋</div><h3>Smart Task Board</h3><p>Create tasks for Math, Science, IS and more. Set due dates, priorities, and watch them disappear as you crush them.</p></div>
+      <div class="feature-card"><div class="f-icon">⚔️</div><h3>XP & Leveling</h3><p>Every completed task earns XP. Level up your hero and unlock new gear, colors, and titles.</p></div>
+      <div class="feature-card"><div class="f-icon">🔥</div><h3>Streak Multipliers</h3><p>Stay consistent. Daily streaks multiply your XP gains — the longer you keep it, the bigger the reward.</p></div>
+      <div class="feature-card"><div class="f-icon">🎨</div><h3>Custom Avatar</h3><p>Pick your hair, skin, outfit, and weapon. Your hero, your style. No two students look the same.</p></div>
+      <div class="feature-card"><div class="f-icon">🏫</div><h3>Classes & Teachers</h3><p>Teachers create classes and post assignments. Students join, submit work, and discuss in-thread.</p></div>
+      <div class="feature-card"><div class="f-icon">💬</div><h3>Discussions</h3><p>Ask questions, leave comments, collaborate. A ManageBAC-style hub without the clutter.</p></div>
+    </div>
+  </section>
+
+  <section id="how" class="section section-alt">
+    <div class="section-head">
+      <h2>How it <span class="gradient-text">works</span></h2>
+      <p>Three steps to a better study routine.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Create your hero</h3><p>Sign up in seconds. Customize your pixel avatar and pick a class role — Student or Teacher.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Add your quests</h3><p>Log homework, projects, and habits. Teachers can push assignments to entire classes.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Level up daily</h3><p>Complete tasks, earn XP, keep your streak alive. Watch your hero grow stronger every day.</p></div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="section-head">
+      <h2>Frequently asked <span class="gradient-text">questions</span></h2>
+      <p>Everything you wanted to know (but were too busy grinding to ask).</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item"><summary>Is TaskHero free to use?<span class="faq-icon">+</span></summary><div class="faq-body">Yes — TaskHero is 100% free. Everything runs in your browser, so there are no subscriptions, no hidden fees, and no ads.</div></details>
+      <details class="faq-item"><summary>Is my data safe?<span class="faq-icon">+</span></summary><div class="faq-body">Your progress is stored locally on your device using localStorage. Nothing is sent to a server. You can clear your data anytime from your browser settings.</div></details>
+      <details class="faq-item"><summary>Who is TaskHero for?<span class="faq-icon">+</span></summary><div class="faq-body">TaskHero is designed specifically for IB MYP Year 1–4 students, but anyone who wants a fun, gamified way to stay organized can use it.</div></details>
+      <details class="faq-item"><summary>Can teachers use TaskHero too?<span class="faq-icon">+</span></summary><div class="faq-body">Absolutely. Teachers can create classes, post assignments, and manage students — all from the same clean dashboard.</div></details>
+      <details class="faq-item"><summary>What subjects are supported?<span class="faq-icon">+</span></summary><div class="faq-body">Math, Science, Individuals & Societies (IS), Language & Literature, Language Acquisition, Arts, Design, and Physical & Health Education. You can also create custom subjects.</div></details>
+      <details class="faq-item"><summary>How do streaks work?<span class="faq-icon">+</span></summary><div class="faq-body">Complete at least one task every day to keep your streak alive. Each day of streak adds a multiplier to your XP — up to 5x at a 30-day streak.</div></details>
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="cta-card">
+      <h2>Ready to become a <span class="gradient-text">TaskHero</span>?</h2>
+      <p>Join thousands of MYP students turning homework into an adventure.</p>
+      <button class="btn btn-primary btn-lg" data-action="show-signup">Create free account</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo"><span class="logo-icon">🛡️</span><span class="logo-text">Task<span class="accent">Hero</span></span></div>
+      <p>Built with ❤️ as an IB Personal Project · © 2026 TaskHero</p>
+      <p class="small" style="margin-top: 8px;"><a href="admin.html" style="color: var(--muted); text-decoration: none; opacity: 0.5;">Admin Panel</a></p>
+    </div>
+  </footer>
+</section>
+
+<!-- ============ AUTH MODAL ============ -->
+<div id="authModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+
+    <div id="loginForm" class="auth-form">
+      <div class="auth-head">
+        <div class="logo"><span class="logo-icon">🛡️</span><span class="logo-text">Task<span class="accent">Hero</span></span></div>
+        <h2>Welcome back, hero.</h2>
+        <p>Log in to continue your quest.</p>
+      </div>
+      <div class="role-tabs">
+        <button type="button" class="role-tab active" data-role="student">🎒 Student</button>
+        <button type="button" class="role-tab" data-role="teacher">👩‍🏫 Teacher</button>
+      </div>
+      <form id="loginFormEl">
+        <input type="hidden" name="role" value="student" />
+        <div class="field"><label>School ID</label><input type="text" name="schoolId" required placeholder="e.g. SCH-00123" /></div>
+        <div class="field"><label>Username</label><input type="text" name="username" required placeholder="your_hero_name" /></div>
+        <div class="field"><label>Password</label><input type="password" name="password" required placeholder="••••••••" /></div>
+        <button type="submit" class="btn btn-primary btn-block">Log in →</button>
+        <p class="auth-switch">No account yet? <a href="#" data-action="switch-signup">Sign up</a></p>
+      </form>
+    </div>
+
+    <div id="signupForm" class="auth-form hidden">
+      <div class="auth-head">
+        <div class="logo"><span class="logo-icon">🛡️</span><span class="logo-text">Task<span class="accent">Hero</span></span></div>
+        <h2>Start your adventure.</h2>
+        <p>Create your hero. No email required.</p>
+      </div>
+      <div class="role-tabs">
+        <button type="button" class="role-tab active" data-role="student">🎒 Student</button>
+        <button type="button" class="role-tab" data-role="teacher">👩‍🏫 Teacher</button>
+      </div>
+      <form id="signupFormEl">
+        <input type="hidden" name="role" value="student" />
+        <div class="field"><label>Display name</label><input type="text" name="displayName" required placeholder="e.g. Alex the Brave" /></div>
+        <div class="field"><label>School ID</label><input type="text" name="schoolId" required placeholder="e.g. SCH-00123" /></div>
+        <div class="field"><label>Username</label><input type="text" name="username" required placeholder="alex_hero" /></div>
+        <div class="field"><label>Password</label><input type="password" name="password" required placeholder="at least 6 characters" minlength="6" /></div>
+        <button type="submit" class="btn btn-primary btn-block">Create hero →</button>
+        <p class="auth-switch">Already have an account? <a href="#" data-action="switch-login">Log in</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<section id="dashboard" class="view">
+  <nav class="dash-nav">
+    <div class="logo"><span class="logo-icon">🛡️</span><span class="logo-text">Task<span class="accent">Hero</span></span></div>
+    <div class="dash-user">
+      <div class="streak-badge" id="streakBadge">🔥 <span id="streakCount">0</span></div>
+      <div class="level-badge">Lv <span id="levelBadge">1</span></div>
+      <div class="user-chip" id="userChip">
+        <div class="mini-avatar"></div>
+        <span id="userName">Hero</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" data-action="logout">Log out</button>
+    </div>
+  </nav>
+
+  <div class="dash-layout">
+    <aside class="sidebar">
+      <div class="side-section">
+        <div class="side-label">Navigation</div>
+        <button class="side-btn active" data-view="overview">🏠 Overview</button>
+        <button class="side-btn" data-view="tasks">📋 My Tasks</button>
+        <button class="side-btn" data-view="classes">🏫 Classes</button>
+        <button class="side-btn" data-view="discussions">💬 Discussions</button>
+        <button class="side-btn" data-view="profile">🎨 My Hero</button>
+      </div>
+      <div class="side-section">
+        <div class="side-label">Progress</div>
+        <div class="xp-card">
+          <div class="xp-head"><span>Level <b id="sideLevel">1</b></span><span id="sideXp">0 / 100 XP</span></div>
+          <div class="xp-bar"><div class="xp-fill" id="sideXpFill"></div></div>
+          <div class="xp-next">Next level: <b id="sideNext">100 XP</b></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <!-- Overview -->
+      <div id="view-overview" class="dash-view active">
+        <div class="view-head">
+          <div><h1 id="greet">Good day, Hero 👋</h1><p class="muted">Here's your quest log for today.</p></div>
+          <button class="btn btn-primary" data-action="open-task-modal">+ New Quest</button>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-ico">📋</div><div class="stat-info"><div class="stat-label">Active Tasks</div><div class="stat-value" id="statActive">0</div></div></div>
+          <div class="stat-card"><div class="stat-ico">✅</div><div class="stat-info"><div class="stat-label">Completed</div><div class="stat-value" id="statDone">0</div></div></div>
+          <div class="stat-card"><div class="stat-ico">⚡</div><div class="stat-info"><div class="stat-label">Total XP</div><div class="stat-value" id="statXp">0</div></div></div>
+          <div class="stat-card"><div class="stat-ico">🔥</div><div class="stat-info"><div class="stat-label">Streak</div><div class="stat-value" id="statStreak">0 days</div></div></div>
+        </div>
+
+        <div class="hero-showcase">
+          <div class="showcase-bg"><div class="showcase-stars"></div><div class="showcase-glow"></div></div>
+          <div class="showcase-pedestal">
+            <div class="pedestal-rune rune1">✦</div><div class="pedestal-rune rune2">✧</div><div class="pedestal-rune rune3">✦</div><div class="pedestal-rune rune4">✧</div>
+          </div>
+          <div class="showcase-hero" id="dashAvatar">
+            <div class="pixel-hero hero-lg">
+              <div class="ph-aura"></div><div class="ph-cape"></div>
+              <div class="ph-head"><div class="ph-eye ph-eye-l"></div><div class="ph-eye ph-eye-r"></div></div>
+              <div class="ph-body"><div class="ph-belt"></div><div class="ph-emblem">⚔</div></div>
+              <div class="ph-arm ph-arm-l"></div><div class="ph-arm ph-arm-r"><div class="ph-weapon ph-weapon-sword"></div></div>
+              <div class="ph-leg ph-leg-l"></div><div class="ph-leg ph-leg-r"></div>
+              <div class="ph-sparkle sp1">✦</div><div class="ph-sparkle sp2">✧</div><div class="ph-sparkle sp3">✦</div><div class="ph-sparkle sp4">✧</div><div class="ph-sparkle sp5">✦</div>
+            </div>
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-name" id="heroName">Hero</div>
+            <div class="showcase-title" id="heroTitle">Novice Apprentice</div>
+            <div class="showcase-school" id="heroSchool">🏫 —</div>
+            <div class="xp-bar lg"><div class="xp-fill" id="heroXpFill"></div></div>
+            <div class="muted small" id="heroXpText">0 / 100 XP to Level 2</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h3>Today's Quests</h3><span class="muted" id="todayDate"></span></div>
+            <div id="todayTasks" class="task-list"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Quick Actions</h3></div>
+            <div class="quick-actions">
+              <button class="qa-btn" data-action="open-task-modal"><span class="qa-icon">📋</span><div><div class="qa-title">New Quest</div><div class="qa-sub">Add a homework task</div></div></button>
+              <button class="qa-btn" data-view="classes"><span class="qa-icon">🏫</span><div><div class="qa-title">My Classes</div><div class="qa-sub">View assignments</div></div></button>
+              <button class="qa-btn" data-view="discussions"><span class="qa-icon">💬</span><div><div class="qa-title">Discussions</div><div class="qa-sub">Chat with classmates</div></div></button>
+              <button class="qa-btn" data-view="profile"><span class="qa-icon">🎨</span><div><div class="qa-title">Customize Hero</div><div class="qa-sub">Change your look</div></div></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasks -->
+      <div id="view-tasks" class="dash-view">
+        <div class="view-head">
+          <div><h1>My Tasks</h1><p class="muted">All your quests in one place.</p></div>
+          <button class="btn btn-primary" data-action="open-task-modal">+ New Quest</button>
+        </div>
+        <div class="filter-bar">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="Math">📐 Math</button>
+          <button class="chip" data-filter="Science">🧪 Science</button>
+          <button class="chip" data-filter="IS">🌍 IS</button>
+          <button class="chip" data-filter="LangLit">📖 Lang & Lit</button>
+          <button class="chip" data-filter="LangAcq">🗣️ Lang Acq</button>
+          <button class="chip" data-filter="Arts">🎨 Arts</button>
+          <button class="chip" data-filter="Design">💻 Design</button>
+          <button class="chip" data-filter="PHE">🏃 PHE</button>
+        </div>
+        <div id="allTasks" class="task-list"></div>
+      </div>
+
+      <!-- Classes (UPDATED) -->
+      <div id="view-classes" class="dash-view">
+        <div class="view-head">
+          <div><h1>Classes</h1><p class="muted" id="classesSub">Your classes and assignments.</p></div>
+          <div class="view-actions" id="classActions"></div>
+        </div>
+        <div id="classesList" class="classes-grid"></div>
+      </div>
+
+      <!-- Discussions -->
+      <div id="view-discussions" class="dash-view">
+        <div class="view-head">
+          <div><h1>Discussions</h1><p class="muted">Ask questions, share ideas, help each other out.</p></div>
+          <button class="btn btn-primary" data-action="open-discussion-modal">+ New Discussion</button>
+        </div>
+        <div id="discussionsList" class="disc-list"></div>
+      </div>
+
+      <!-- Profile -->
+      <div id="view-profile" class="dash-view">
+        <div class="view-head"><div><h1>My Hero</h1><p class="muted">Customize your avatar. Express yourself.</p></div></div>
+        <div class="profile-layout">
+          <div class="panel profile-preview">
+            <div class="profile-avatar-wrap" id="profileAvatar">
+              <div class="pixel-hero hero-xl">
+                <div class="ph-aura"></div><div class="ph-cape"></div>
+                <div class="ph-head"><div class="ph-eye ph-eye-l"></div><div class="ph-eye ph-eye-r"></div></div>
+                <div class="ph-body"><div class="ph-belt"></div><div class="ph-emblem">⚔</div></div>
+                <div class="ph-arm ph-arm-l"></div><div class="ph-arm ph-arm-r"><div class="ph-weapon ph-weapon-sword"></div></div>
+                <div class="ph-leg ph-leg-l"></div><div class="ph-leg ph-leg-r"></div>
+                <div class="ph-sparkle sp1">✦</div><div class="ph-sparkle sp2">✧</div><div class="ph-sparkle sp3">✦</div><div class="ph-sparkle sp4">✧</div><div class="ph-sparkle sp5">✦</div>
+              </div>
+            </div>
+            <div class="hero-name" id="profileName">Hero</div>
+            <div class="hero-title" id="profileTitle">Novice Apprentice</div>
+          </div>
+          <div class="panel profile-controls">
+            <h3>Customize</h3>
+            <div class="custom-row">
+              <label>Skin</label>
+              <div class="swatches" data-custom="skin">
+                <button class="swatch" data-val="#f5d0a9" style="background:#f5d0a9"></button>
+                <button class="swatch" data-val="#e0ac69" style="background:#e0ac69"></button>
+                <button class="swatch" data-val="#c68642" style="background:#c68642"></button>
+                <button class="swatch" data-val="#8d5524" style="background:#8d5524"></button>
+                <button class="swatch" data-val="#ffdbac" style="background:#ffdbac"></button>
+              </div>
+            </div>
+            <div class="custom-row">
+              <label>Hair</label>
+              <div class="swatches" data-custom="hair">
+                <button class="swatch" data-val="#2b1b17" style="background:#2b1b17"></button>
+                <button class="swatch" data-val="#8b4513" style="background:#8b4513"></button>
+                <button class="swatch" data-val="#d4a017" style="background:#d4a017"></button>
+                <button class="swatch" data-val="#c0392b" style="background:#c0392b"></button>
+                <button class="swatch" data-val="#ecf0f1" style="background:#ecf0f1"></button>
+                <button class="swatch" data-val="#3498db" style="background:#3498db"></button>
+              </div>
+            </div>
+            <div class="custom-row">
+              <label>Outfit</label>
+              <div class="swatches" data-custom="outfit">
+                <button class="swatch" data-val="#3498db" style="background:#3498db"></button>
+                <button class="swatch" data-val="#e74c3c" style="background:#e74c3c"></button>
+                <button class="swatch" data-val="#2ecc71" style="background:#2ecc71"></button>
+                <button class="swatch" data-val="#9b59b6" style="background:#9b59b6"></button>
+                <button class="swatch" data-val="#f39c12" style="background:#f39c12"></button>
+                <button class="swatch" data-val="#1abc9c" style="background:#1abc9c"></button>
+              </div>
+            </div>
+            <div class="custom-row">
+              <label>Weapon</label>
+              <div class="swatches weapon-pick" data-custom="weapon">
+                <button class="weapon-btn active" data-val="sword">⚔️ Sword</button>
+                <button class="weapon-btn" data-val="staff">🪄 Staff</button>
+                <button class="weapon-btn" data-val="bow">🏹 Bow</button>
+                <button class="weapon-btn" data-val="book">📚 Book</button>
+              </div>
+            </div>
+            <div class="custom-row">
+              <label>Title</label>
+              <input type="text" id="titleInput" placeholder="e.g. Math Wizard" maxlength="30" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ============ TASK MODAL ============ -->
+<div id="taskModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+    <div class="auth-head"><h2 id="taskModalTitle">New Quest</h2><p>Define your next mission.</p></div>
+    <form id="taskForm">
+      <input type="hidden" name="id" />
+      <div class="field"><label>Quest name</label><input type="text" name="title" required placeholder="e.g. Finish Math worksheet Ch.4" /></div>
+      <div class="field-row">
+        <div class="field"><label>Subject</label>
+          <select name="subject" required>
+            <option value="Math">📐 Math</option><option value="Science">🧪 Science</option><option value="IS">🌍 Individuals & Societies</option>
+            <option value="LangLit">📖 Language & Literature</option><option value="LangAcq">🗣️ Language Acquisition</option>
+            <option value="Arts">🎨 Arts</option><option value="Design">💻 Design</option><option value="PHE">🏃 PHE</option>
+          </select>
+        </div>
+        <div class="field"><label>Due date</label><input type="date" name="due" required /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>XP Reward</label>
+          <select name="xp"><option value="20">⚡ 20 XP · Quick task</option><option value="40" selected>⚡ 40 XP · Normal</option><option value="70">⚡ 70 XP · Big task</option><option value="100">⚡ 100 XP · Boss quest</option></select>
+        </div>
+        <div class="field"><label>Priority</label>
+          <select name="priority"><option value="low">🟢 Low</option><option value="medium" selected>🟡 Medium</option><option value="high">🔴 High</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Description (optional)</label><textarea name="description" rows="3" placeholder="Any details..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Quest</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ CREATE CLASS MODAL (TEACHER) ============ -->
+<div id="createClassModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+    <div class="auth-head"><h2>Create New Class</h2><p>Generate a unique code for your students.</p></div>
+    <form id="createClassForm">
+      <div class="field"><label>Class Name</label><input type="text" name="name" required placeholder="e.g. MYP 2 Math" /></div>
+      <div class="field-row">
+        <div class="field"><label>Subject</label>
+          <select name="subject" required>
+            <option value="Math">📐 Math</option><option value="Science">🧪 Science</option><option value="IS">🌍 IS</option>
+            <option value="LangLit">📖 Lang & Lit</option><option value="LangAcq">🗣️ Lang Acq</option>
+            <option value="Arts">🎨 Arts</option><option value="Design">💻 Design</option><option value="PHE">🏃 PHE</option>
+          </select>
+        </div>
+        <div class="field"><label>Grade/Year</label><input type="text" name="grade" required placeholder="e.g. MYP 2" /></div>
+      </div>
+      <div class="field"><label>Description</label><textarea name="description" rows="2" placeholder="Optional details..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Generate Code & Create</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ JOIN CLASS MODAL (STUDENT) ============ -->
+<div id="joinClassModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+    <div class="auth-head"><h2>Join a Class</h2><p>Enter the code provided by your teacher.</p></div>
+    <form id="joinClassForm">
+      <div class="field"><label>Class Code</label><input type="text" name="code" required placeholder="e.g. TEST-MATH-2A" style="text-transform: uppercase; font-family: monospace; font-size: 1.1rem; letter-spacing: 2px; text-align: center;" /></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Join Class</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ POST ASSIGNMENT MODAL (TEACHER) ============ -->
+<div id="assignmentModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+    <div class="auth-head"><h2>Post Assignment</h2><p id="assignClassName">For class: —</p></div>
+    <form id="assignmentForm">
+      <input type="hidden" name="classCode" />
+      <div class="field"><label>Assignment Title</label><input type="text" name="title" required placeholder="e.g. Chapter 4 Worksheet" /></div>
+      <div class="field-row">
+        <div class="field"><label>Due Date</label><input type="date" name="due" required /></div>
+        <div class="field"><label>XP Reward</label>
+          <select name="xp"><option value="20">⚡ 20 XP</option><option value="40" selected>⚡ 40 XP</option><option value="70">⚡ 70 XP</option><option value="100">⚡ 100 XP</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Description / Instructions</label><textarea name="description" rows="3" placeholder="What students need to do..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Post to Class</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ DISCUSSION MODAL ============ -->
+<div id="discussionModal" class="modal hidden">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">✕</button>
+    <div class="auth-head"><h2>Start a Discussion</h2><p>Ask a question or share something useful.</p></div>
+    <form id="discussionForm">
+      <div class="field"><label>Title</label><input type="text" name="title" required placeholder="e.g. How do I solve quadratic equations?" /></div>
+      <div class="field"><label>Subject tag</label>
+        <select name="subject"><option value="General">General</option><option value="Math">Math</option><option value="Science">Science</option><option value="IS">IS</option><option value="LangLit">Lang & Lit</option><option value="Design">Design</option></select>
+      </div>
+      <div class="field"><label>Message</label><textarea name="body" rows="5" required placeholder="Write your post..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-action="close-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+<!-- Level up overlay -->
+<div id="levelUp" class="level-up hidden">
+  <div class="lu-inner">
+    <div class="lu-sparkle">✨</div>
+    <h1>LEVEL UP!</h1>
+    <div class="lu-level" id="luLevel">2</div>
+    <p id="luTitle">Apprentice Hero</p>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
