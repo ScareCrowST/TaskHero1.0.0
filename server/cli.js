@@ -2,7 +2,11 @@
 /**
  *   node server/cli.js reset-admin [newPassword]   -> set / reset the super-admin password
  *   node server/cli.js seed-demo                   -> create an approved demo school with sample data
+ *   node server/cli.js backup [folder]             -> consistent copy of every database + uploads
+ *   node server/cli.js list-schools                -> show registered schools and their status
  */
+const fs = require('node:fs');
+const path = require('node:path');
 const db = require('./lib/db');
 const auth = require('./lib/auth');
 const { DEFAULT_AVATAR } = require('./lib/serialize');
@@ -55,7 +59,32 @@ function seedDemo() {
   console.log(`Demo school created.\n  School ID: ${CODE}\n  Password for every demo account: ${PASSWORD}\n  Accounts: demo_admin (admin), ms_rivera (teacher), alex / sam / mira (students)\n  Class join code: DEMO-MATH`);
 }
 
+/** Safe to run while the server is running: VACUUM INTO writes a consistent snapshot of each database. */
+function backup(target) {
+  const stamp = new Date().toISOString().replace(/[:T]/g, '-').slice(0, 19);
+  const out = path.resolve(target || path.join(db.DATA_DIR, '..', 'backups', 'taskhero-' + stamp));
+  if (fs.existsSync(out) && fs.readdirSync(out).length) { console.error('Backup folder already exists and is not empty: ' + out); process.exitCode = 1; return; }
+  fs.mkdirSync(path.join(out, 'schools'), { recursive: true });
+  const snap = (src, dest) => src.exec(`VACUUM INTO '${dest.replace(/'/g, "''")}'`);
+  snap(db.master(), path.join(out, 'master.db'));
+  const codes = db.master().prepare('SELECT code FROM schools').all().map((r) => r.code).filter((c) => db.schoolExists(c));
+  for (const code of codes) snap(db.schoolDb(code), path.join(out, 'schools', code + '.db'));
+  const uploads = path.join(db.DATA_DIR, 'uploads');
+  if (fs.existsSync(uploads)) fs.cpSync(uploads, path.join(out, 'uploads'), { recursive: true });
+  console.log(`Backup of ${codes.length} school${codes.length === 1 ? '' : 's'} written to:\n  ${out}\n` +
+    'To restore: stop TaskHero, copy master.db, schools/ and uploads/ from the backup into the data folder, then start it again.');
+}
+
+function listSchools() {
+  const rows = db.master().prepare('SELECT code, name, status, created_at FROM schools ORDER BY created_at').all();
+  if (!rows.length) return console.log('No schools registered yet.');
+  for (const r of rows) console.log(`${r.code.padEnd(26)} ${r.status.padEnd(9)} ${r.name}`);
+  return undefined;
+}
+
 if (cmd === 'reset-admin') resetAdmin(arg);
+else if (cmd === 'backup') backup(arg);
+else if (cmd === 'list-schools') listSchools();
 else if (cmd === 'seed-demo') seedDemo();
-else console.log('Usage: node server/cli.js <reset-admin [password] | seed-demo>');
+else console.log('Usage: node server/cli.js <reset-admin [password] | seed-demo | backup [folder] | list-schools>');
 db.closeAll();

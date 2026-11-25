@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Register Your School — TaskHero</title>
-<link rel="stylesheet" href="css/styles.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/press-start-2p@5.0.0/index.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.0/index.css" />
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/styles.css" />
+<link rel="stylesheet" href="/css/app.css" />
 </head>
 <body>
 
 <div class="register-page">
   <div class="register-container">
     <div class="register-header">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <span class="logo-icon">🛡️</span>
         <span class="logo-text">Task<span class="accent">Hero</span></span>
       </a>
@@ -27,16 +27,16 @@
         <div class="info-content">
           <h3>What happens next?</h3>
           <ul>
-            <li>Your registration will be reviewed by the TaskHero team</li>
-            <li>You'll receive an email confirmation within 24-48 hours</li>
-            <li>Once approved, you'll become the School Admin</li>
-            <li>You can then invite teachers and manage your school</li>
+            <li>Your registration is reviewed by the TaskHero administrator</li>
+            <li>Once approved, you can log in with your School ID and become the School Admin</li>
+            <li>Your school gets its own separate database on this server</li>
+            <li>You can then create teacher and student accounts, or let them sign up with your School ID</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <form id="schoolRegisterForm" class="register-form">
+    <form id="schoolRegisterForm" class="register-form" novalidate>
       <div class="form-section">
         <h2>School Information</h2>
         
@@ -75,8 +75,8 @@
             <input type="text" name="adminName" required placeholder="e.g. John Smith" />
           </div>
           <div class="field">
-            <label>Admin Position *</label>
-            <input type="text" name="adminPosition" required placeholder="e.g. Principal, IT Director" />
+            <label>Admin Username *</label>
+            <input type="text" name="adminUsername" required maxlength="30" placeholder="e.g. head_admin" autocomplete="username" />
           </div>
         </div>
 
@@ -84,12 +84,6 @@
           <label>Admin Email *</label>
           <input type="email" name="adminEmail" required placeholder="admin@yourschool.edu" />
           <span class="field-hint">Must be a school email address (preferred)</span>
-        </div>
-
-        <div class="field">
-          <label>Admin Phone</label>
-          <input type="tel" name="adminPhone" placeholder="+420 123 456 789" />
-          <span class="field-hint">Optional — for verification purposes</span>
         </div>
 
         <div class="field-row">
@@ -140,18 +134,19 @@
         <div class="checkbox-field">
           <input type="checkbox" id="terms" name="terms" required />
           <label for="terms">
-            I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>. 
+            I agree to the Terms of Service and Privacy Policy. 
             I confirm that I am authorized to register this school.
           </label>
         </div>
       </div>
 
+      <div class="form-error" role="alert" id="regError"></div>
       <button type="submit" class="btn btn-primary btn-lg btn-block">
         Submit Registration →
       </button>
 
       <p class="register-footer">
-        Already have an account? <a href="index.html">Log in here</a>
+        Already have an account? <a href="/">Log in here</a>
       </p>
     </form>
   </div>
@@ -174,13 +169,13 @@
         <span class="detail-value status-pending">Pending Review</span>
       </div>
     </div>
-    <p class="muted small">You will receive an email at <strong id="displayEmail">—</strong> once your school is approved.</p>
-    <button class="btn btn-primary btn-block" onclick="window.location.href='index.html'">
+    <p class="muted small">No email is sent. Come back and try logging in with your School ID — it works as soon as the TaskHero administrator approves your school.</p>
+    <a class="btn btn-primary btn-block" href="/">
       Return to Home
-    </button>
+    </a>
   </div>
 </div>
 
-<script src="js/school-register.js"></script>
+<script type="module" src="/js/register-school.js"></script>
 </body>
 </html>

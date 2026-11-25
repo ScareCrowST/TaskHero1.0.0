@@ -8,6 +8,8 @@
   "scripts": {
     "start": "node server/index.js",
     "seed": "node server/cli.js seed-demo",
+    "backup": "node server/cli.js backup",
+    "e2e": "node tests/e2e.js",
     "reset-admin": "node server/cli.js reset-admin",
     "test": "node --test --test-reporter=spec tests/*.test.js"
   }
